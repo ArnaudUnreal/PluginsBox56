@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\toolsproject\\plugins\\minimap\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\minimap\\module.minimap.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\toolsproject\\intermediate\\build\\win64\\x64\\toolsprojecteditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\toolsproject\\plugins\\minimap\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\minimap\\definitions.minimap.h",
+            "d:\\unreal_projects\\toolsproject\\plugins\\minimap\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\minimap\\permoduleinline.gen.cpp",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\core\\public\\hal\\permoduleinline.inl"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

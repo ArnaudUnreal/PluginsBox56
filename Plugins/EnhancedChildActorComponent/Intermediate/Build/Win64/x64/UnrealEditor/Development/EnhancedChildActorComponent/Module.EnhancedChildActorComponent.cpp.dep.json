@@ -1,0 +1,31 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\enhancedchildactorcomponent\\module.enhancedchildactorcomponent.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\intermediate\\build\\win64\\x64\\pluginsboxeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\enhancedchildactorcomponent\\definitions.enhancedchildactorcomponent.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedchildactorcomponent\\uht\\enhancedchildactorcomponent.gen.cpp",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\source\\enhancedchildactorcomponent\\public\\enhancedchildactorcomponent.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\source\\enhancedchildactorcomponent\\public\\linkedactordescriptor.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\coreuobject\\public\\structutils\\propertybag.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\coreuobject\\public\\structutils\\structview.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\coreuobject\\public\\structutils\\instancedstruct.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\coreuobject\\public\\structutils\\structutils.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\coreuobject\\uht\\instancedstruct.generated.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\coreuobject\\public\\structutils\\sharedstruct.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\coreuobject\\public\\structutils\\structutilstypes.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\coreuobject\\uht\\sharedstruct.generated.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\coreuobject\\uht\\propertybag.generated.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedchildactorcomponent\\uht\\linkedactordescriptor.generated.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedchildactorcomponent\\uht\\enhancedchildactorcomponent.generated.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedchildactorcomponent\\uht\\enhancedchildactorcomponent.init.gen.cpp",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\unrealeditor\\inc\\enhancedchildactorcomponent\\uht\\linkedactordescriptor.gen.cpp",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\enhancedchildactorcomponent\\permoduleinline.gen.cpp",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\core\\public\\hal\\permoduleinline.inl"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

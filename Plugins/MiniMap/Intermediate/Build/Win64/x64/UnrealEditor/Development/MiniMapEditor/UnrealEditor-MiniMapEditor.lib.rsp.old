@@ -1,0 +1,14 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-MiniMapEditor.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:/Unreal_Projects/Gregr/Intermediate/Build/Win64/x64/GregrEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.InclOrderUnreal5_3.h.obj"
+"D:/Unreal_Projects/Gregr/Plugins/MiniMap/Intermediate/Build/Win64/x64/UnrealEditor/Development/MiniMapEditor/Module.MiniMapEditor.cpp.obj"
+"D:/Unreal_Projects/Gregr/Plugins/MiniMap/Intermediate/Build/Win64/x64/UnrealEditor/Development/MiniMapEditor/SMiniMapViewport.cpp.obj"
+"D:/Unreal_Projects/Gregr/Plugins/MiniMap/Intermediate/Build/Win64/x64/UnrealEditor/Development/MiniMapEditor/PerModuleInline.gen.cpp.obj"
+"D:/Unreal_Projects/Gregr/Plugins/MiniMap/Intermediate/Build/Win64/x64/UnrealEditor/Development/MiniMapEditor/Default.rc2.res"
+/OUT:"D:/Unreal_Projects/Gregr/Plugins/MiniMap/Intermediate/Build/Win64/x64/UnrealEditor/Development/MiniMapEditor/UnrealEditor-MiniMapEditor.lib"

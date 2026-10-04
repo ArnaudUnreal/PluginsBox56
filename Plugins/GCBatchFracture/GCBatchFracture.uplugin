@@ -1,0 +1,33 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.4.3",
+	"FriendlyName": "Chaos Batch Fracture",
+	"Description": "Editor-only batch creation of Geometry Collections by fracturing  selected Static Meshes.",
+	"Category": "Editor",
+	"CreatedBy": "Arnaud Szobad",
+	"CreatedByURL": "https://www.fab.com/sellers/Mecanode",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"SupportedTargetPlatforms": [
+		"Win64"
+	],
+	"Modules": [
+		{
+			"Name": "GCBatchFracture",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ChaosEditor",
+			"Enabled": true
+		}
+	],
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"IsExperimentalVersion": false
+}

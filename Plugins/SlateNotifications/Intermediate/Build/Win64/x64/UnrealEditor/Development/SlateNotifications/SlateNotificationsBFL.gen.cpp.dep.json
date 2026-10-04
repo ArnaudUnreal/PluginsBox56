@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\gregr\\plugins\\slatenotifications\\intermediate\\build\\win64\\unrealeditor\\inc\\slatenotifications\\uht\\slatenotificationsbfl.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\gregr\\intermediate\\build\\win64\\x64\\gregreditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\gregr\\plugins\\slatenotifications\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\slatenotifications\\definitions.slatenotifications.h",
+            "d:\\unreal_projects\\gregr\\plugins\\slatenotifications\\source\\slatenotifications\\public\\slatenotificationsbfl.h",
+            "d:\\unreal_projects\\gregr\\plugins\\slatenotifications\\intermediate\\build\\win64\\unrealeditor\\inc\\slatenotifications\\uht\\slatenotificationsbfl.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

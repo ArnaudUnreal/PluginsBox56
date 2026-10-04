@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\testeditormode\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\testeditormode\\module.testeditormode.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\intermediate\\build\\win64\\x64\\pluginsboxeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\testeditormode\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\testeditormode\\definitions.testeditormode.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\testeditormode\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\testeditormode\\permoduleinline.gen.cpp",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\core\\public\\hal\\permoduleinline.inl"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

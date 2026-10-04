@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\gcbatchfracture\\source\\gcbatchfracture\\private\\gcbatchfracturelog.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\intermediate\\build\\win64\\x64\\pluginsboxeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\gcbatchfracture\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\gcbatchfracture\\definitions.gcbatchfracture.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\gcbatchfracture\\source\\gcbatchfracture\\public\\gcbatchfracturelog.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

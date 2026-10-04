@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\gregr\\plugins\\minimap\\source\\minimapeditor\\private\\minimapeditor.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\gregr\\intermediate\\build\\win64\\x64\\gregreditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\gregr\\plugins\\minimap\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\minimapeditor\\definitions.minimapeditor.h",
+            "d:\\unreal_projects\\gregr\\plugins\\minimap\\source\\minimapeditor\\public\\minimapeditor.h",
+            "d:\\unreal_projects\\gregr\\plugins\\minimap\\source\\minimapeditor\\public\\sminimapviewport.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

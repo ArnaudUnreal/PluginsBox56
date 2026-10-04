@@ -1,0 +1,13 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.EnhancedChildActorComponent.cpp.obj": [
+			"EnhancedChildActorComponent.gen.cpp.obj",
+			"EnhancedChildActorComponent.init.gen.cpp.obj",
+			"LinkedActorDescriptor.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj",
+			"EnhancedChildActorComponent.cpp.obj",
+			"EnhancedChildActorComponentModule.cpp.obj"
+		]
+	}
+}

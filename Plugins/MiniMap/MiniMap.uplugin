@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 2,
+	"VersionName": "1.1",
+	"FriendlyName": "MiniMap",
+	"Description": "Editor-only top-down mini-map of the current level: navigate the editor camera, see and select actors, optional captured background.",
+	"Category": "Editor",
+	"CreatedBy": "Arnaud Szobad",
+	"CreatedByURL": "https://www.fab.com/sellers/Mecanode",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"SupportedTargetPlatforms": [
+		"Win64"
+	],
+	"Modules": [
+		{
+			"Name": "MiniMapEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}

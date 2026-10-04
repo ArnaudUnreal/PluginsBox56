@@ -1,0 +1,23 @@
+﻿{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "EnhancedChildActorComponent",
+	"Description": "Enhanced ChildActorComponent",
+	"Category": "Other",
+	"CreatedBy": "Mecanode",
+	"CreatedByURL": "https://www.mecanode.com",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "EnhancedChildActorComponent",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

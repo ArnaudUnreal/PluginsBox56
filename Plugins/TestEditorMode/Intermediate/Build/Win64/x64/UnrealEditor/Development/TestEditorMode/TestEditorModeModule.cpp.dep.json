@@ -1,0 +1,23 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\testeditormode\\source\\testeditormode\\private\\testeditormodemodule.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\intermediate\\build\\win64\\x64\\pluginsboxeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\testeditormode\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\testeditormode\\definitions.testeditormode.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\testeditormode\\source\\testeditormode\\public\\testeditormodemodule.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\testeditormode\\source\\testeditormode\\public\\testedmode.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\editor\\unrealed\\public\\edmode.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\editor\\unrealed\\public\\editormoderegistry.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\editor\\unrealed\\public\\tools\\uedmode.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealed\\uht\\uedmode.generated.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\editor\\unrealed\\public\\tools\\legacyedmodewidgethelpers.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\editor\\unrealed\\public\\tools\\legacyedmodeinterfaces.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealed\\uht\\legacyedmodeinterfaces.generated.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealed\\uht\\legacyedmodewidgethelpers.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

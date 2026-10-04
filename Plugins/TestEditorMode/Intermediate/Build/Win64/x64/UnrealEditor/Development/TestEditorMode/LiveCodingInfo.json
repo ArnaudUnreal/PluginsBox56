@@ -1,0 +1,11 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.TestEditorMode.cpp.obj": [
+			"PerModuleInline.gen.cpp.obj",
+			"FTestEditorModeToolkit.cpp.obj",
+			"TestEditorModeModule.cpp.obj",
+			"TestEdMode.cpp.obj"
+		]
+	}
+}

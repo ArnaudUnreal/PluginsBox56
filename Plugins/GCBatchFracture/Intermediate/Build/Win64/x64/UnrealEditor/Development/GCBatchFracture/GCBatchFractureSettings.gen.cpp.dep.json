@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\gregr\\plugins\\gcbatchfracture\\intermediate\\build\\win64\\unrealeditor\\inc\\gcbatchfracture\\uht\\gcbatchfracturesettings.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\gregr\\intermediate\\build\\win64\\x64\\gregreditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\gregr\\plugins\\gcbatchfracture\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\gcbatchfracture\\definitions.gcbatchfracture.h",
+            "d:\\unreal_projects\\gregr\\plugins\\gcbatchfracture\\source\\gcbatchfracture\\public\\gcbatchfracturesettings.h",
+            "d:\\unreal_projects\\gregr\\plugins\\gcbatchfracture\\intermediate\\build\\win64\\unrealeditor\\inc\\gcbatchfracture\\uht\\gcbatchfracturesettings.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

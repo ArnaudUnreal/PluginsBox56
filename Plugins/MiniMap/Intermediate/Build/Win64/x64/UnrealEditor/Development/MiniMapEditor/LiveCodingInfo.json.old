@@ -1,0 +1,10 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.MiniMapEditor.cpp.obj": [
+			"MiniMapEditor.cpp.obj",
+			"PerModuleInline.gen.cpp.obj",
+			"SMiniMapViewport.cpp.obj"
+		]
+	}
+}

@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\source\\enhancedchildactorcomponent\\private\\enhancedchildactorcomponentmodule.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\intermediate\\build\\win64\\x64\\pluginsboxeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\enhancedchildactorcomponent\\definitions.enhancedchildactorcomponent.h",
+            "d:\\unreal_projects\\plugins\\5.6\\pluginsbox\\plugins\\enhancedchildactorcomponent\\source\\enhancedchildactorcomponent\\public\\enhancedchildactorcomponentmodule.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

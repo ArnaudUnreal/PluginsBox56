@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-TestEditorMode.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:/Unreal_Projects/Plugins/5.6/PluginsBox/Intermediate/Build/Win64/x64/PluginsBoxEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.obj"
+"D:/Unreal_Projects/Plugins/5.6/PluginsBox/Plugins/TestEditorMode/Intermediate/Build/Win64/x64/UnrealEditor/Development/TestEditorMode/Module.TestEditorMode.cpp.obj"
+"D:/Unreal_Projects/Plugins/5.6/PluginsBox/Plugins/TestEditorMode/Intermediate/Build/Win64/x64/UnrealEditor/Development/TestEditorMode/FTestEditorModeToolkit.cpp.obj"
+"D:/Unreal_Projects/Plugins/5.6/PluginsBox/Plugins/TestEditorMode/Intermediate/Build/Win64/x64/UnrealEditor/Development/TestEditorMode/TestEditorModeModule.cpp.obj"
+"D:/Unreal_Projects/Plugins/5.6/PluginsBox/Plugins/TestEditorMode/Intermediate/Build/Win64/x64/UnrealEditor/Development/TestEditorMode/TestEdMode.cpp.obj"
+"D:/Unreal_Projects/Plugins/5.6/PluginsBox/Plugins/TestEditorMode/Intermediate/Build/Win64/x64/UnrealEditor/Development/TestEditorMode/Default.rc2.res"
+/OUT:"D:/Unreal_Projects/Plugins/5.6/PluginsBox/Plugins/TestEditorMode/Intermediate/Build/Win64/x64/UnrealEditor/Development/TestEditorMode/UnrealEditor-TestEditorMode.lib"
