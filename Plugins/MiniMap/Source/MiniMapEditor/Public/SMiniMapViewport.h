@@ -40,13 +40,14 @@ public:
 	void CaptureBackground();
 	bool HasBackground() const { return BackgroundRT.IsValid(); }
 
-	void SetShowAllActors(bool bInShow) { bShowAllActors = bInShow; }
+	// Show every actor (filter ignored). When off, only actors matching the filter are shown
+	void SetShowAllActors(bool bInShow);
 	bool GetShowAllActors() const { return bShowAllActors; }
 
 	void SetShowBackground(bool bInShow) { bShowBackground = bInShow; }
 	bool GetShowBackground() const { return bShowBackground; }
 
-	// Case-insensitive substring on actor class name or label
+	// Case-insensitive substring on actor class name or label, used when "all actors" is off
 	void SetFilterText(const FString& InFilter);
 
 	// Move the active editor camera so it looks at WorldPos (ground Z traced), keeping its rotation
@@ -90,9 +91,13 @@ private:
 	void EnsureActorCache() const;
 	bool PassesFilter(const AActor* Actor) const;
 
+	// True if the actor list (all actors, or filtered actors) is displayed besides the selection
+	bool ShowsActorList() const { return bShowAllActors || !FilterText.IsEmpty(); }
+
 	void HandleMapChange(uint32 MapChangeFlags);
 	void HandleActorAddedOrDeleted(AActor* Actor);
 	void HandleActorMoved(AActor* Actor);
+	void HandleActorLabelChanged(AActor* Actor);
 
 	// State
 	float Zoom = 1.0f;                     // ZoomMin .. ZoomMax

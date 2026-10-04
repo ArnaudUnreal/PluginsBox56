@@ -52,7 +52,7 @@ void SMiniMapPanel::Construct(const FArguments& InArgs)
 			.Padding(0.f, 0.f, 10.f, 0.f)
 			[
 				MakeToggle(LOCTEXT("AllActors", "All actors"),
-					LOCTEXT("AllActorsTooltip", "Show every actor of the level, not only the selection."),
+					LOCTEXT("AllActorsTooltip", "Show every actor of the level. Uncheck to use the filter."),
 					[this]() { return Viewport->GetShowAllActors(); },
 					[this](bool b) { Viewport->SetShowAllActors(b); })
 			]
@@ -86,6 +86,8 @@ void SMiniMapPanel::Construct(const FArguments& InArgs)
 			[
 				SNew(SSearchBox)
 				.HintText(LOCTEXT("FilterHint", "Filter actors (class or label)"))
+				.ToolTipText(LOCTEXT("FilterTooltip", "Show only actors whose class or label contains the text. Available when 'All actors' is unchecked."))
+				.IsEnabled_Lambda([this]() { return !Viewport->GetShowAllActors(); })
 				.OnTextChanged_Lambda([this](const FText& Text) { Viewport->SetFilterText(Text.ToString()); })
 			]
 		]

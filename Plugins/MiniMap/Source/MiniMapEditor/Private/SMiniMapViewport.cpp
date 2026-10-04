@@ -5,6 +5,7 @@
 #include "ScopedTransaction.h"
 #include "Engine/Selection.h"
 #include "GameFramework/Info.h"
+#include "Misc/CoreDelegates.h"
 #include "LevelEditorViewport.h"
 #include "RenderingThread.h"
 #include "Components/SceneCaptureComponent2D.h"
@@ -125,6 +126,7 @@ void SMiniMapViewport::Construct(const FArguments& InArgs)
 	SetClipping(EWidgetClipping::ClipToBounds);
 
 	FEditorDelegates::MapChange.AddSP(this, &SMiniMapViewport::HandleMapChange);
+	FCoreDelegates::OnActorLabelChanged.AddSP(this, &SMiniMapViewport::HandleActorLabelChanged);
 	if (GEngine)
 	{
 		GEngine->OnLevelActorAdded().AddSP(this, &SMiniMapViewport::HandleActorAddedOrDeleted);
@@ -142,6 +144,7 @@ void SMiniMapViewport::Construct(const FArguments& InArgs)
 SMiniMapViewport::~SMiniMapViewport()
 {
 	FEditorDelegates::MapChange.RemoveAll(this);
+	FCoreDelegates::OnActorLabelChanged.RemoveAll(this);
 	if (GEngine)
 	{
 		GEngine->OnLevelActorAdded().RemoveAll(this);
@@ -172,6 +175,21 @@ void SMiniMapViewport::HandleActorMoved(AActor* Actor)
 	}
 }
 
+void SMiniMapViewport::HandleActorLabelChanged(AActor* Actor)
+{
+	// Only the filter depends on the label
+	if (!bShowAllActors && !FilterText.IsEmpty())
+	{
+		bActorCacheDirty = true;
+	}
+}
+
+void SMiniMapViewport::SetShowAllActors(bool bInShow)
+{
+	bShowAllActors = bInShow;
+	bActorCacheDirty = true;
+}
+
 void SMiniMapViewport::SetFilterText(const FString& InFilter)
 {
 	FilterText = InFilter.TrimStartAndEnd();
@@ -180,7 +198,8 @@ void SMiniMapViewport::SetFilterText(const FString& InFilter)
 
 bool SMiniMapViewport::PassesFilter(const AActor* Actor) const
 {
-	return FilterText.IsEmpty()
+	return bShowAllActors
+		|| FilterText.IsEmpty()
 		|| Actor->GetClass()->GetName().Contains(FilterText)
 		|| Actor->GetActorLabel().Contains(FilterText);
 }
@@ -394,7 +413,7 @@ FSlateRect SMiniMapViewport::FootprintToMap(const FBox2D& Footprint, const FVect
 AActor* SMiniMapViewport::FindActorAt(const FVector2D& LocalPos, const FVector2D& Size) const
 {
 	TArray<AActor*> Candidates;
-	if (bShowAllActors)
+	if (ShowsActorList())
 	{
 		EnsureActorCache();
 		for (const FCachedActor& Entry : CachedActors)
@@ -547,8 +566,8 @@ int32 SMiniMapViewport::OnPaint(const FPaintArgs& Args, const FGeometry& Geo,
 		}
 	};
 
-	// All (filtered) actors
-	if (bShowAllActors)
+	// All actors, or filtered actors
+	if (ShowsActorList())
 	{
 		EnsureActorCache();
 		for (const FCachedActor& Entry : CachedActors)

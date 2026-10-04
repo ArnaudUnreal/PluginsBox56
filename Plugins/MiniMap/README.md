@@ -39,9 +39,9 @@ Win64 (editor only)
 - Double-click an actor to focus the editor camera on it.
 - Click empty space to move the editor camera there, keeping its rotation and height above ground.
 - Top / Bottom orthographic viewports follow the camera moves.
-- Actor filter by class name or actor label.
+- Actor filter by class name or actor label, available when **All actors** is unchecked.
 - Optional top-down captured background image of the level.
-- Automatic refresh when actors are added, deleted or moved, and when another level is opened.
+- Automatic refresh when actors are added, deleted, moved or renamed, and when another level is opened.
 
 ---
 
@@ -62,10 +62,10 @@ Open the tab from **Window > Level Editor > Mini-Map**, then dock it wherever yo
 | Control | Action |
 |---|---|
 | **Fit** | Recompute the level bounds and reset pan / zoom. |
-| **All actors** | Show every actor of the level, not only the selection. |
+| **All actors** | Show every actor of the level. Uncheck it to use the filter. |
 | **Capture** | Render a top-down image of the current map area and use it as background. |
 | **Background** | Show / hide the captured background. |
-| **Filter** | Only show actors whose class name or label contains the text (case-insensitive). |
+| **Filter** | Enabled when **All actors** is unchecked. Shows only the actors whose class name or label contains the text (case-insensitive). Empty: only the selection is shown. |
 
 ### Mouse controls
 
