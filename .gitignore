@@ -73,3 +73,9 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Not versioned (local only)
+/Content/
+/Docs/
+/.idea/
+/update_copyright.py
