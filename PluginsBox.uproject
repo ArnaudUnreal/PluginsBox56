@@ -23,6 +23,9 @@
 			"Enabled": true,
 			"TargetAllowList": [
 				"Editor"
+			],
+			"SupportedTargetPlatforms": [
+				"Win64"
 			]
 		},
 		{
@@ -30,6 +33,9 @@
 			"Enabled": true,
 			"TargetAllowList": [
 				"Editor"
+			],
+			"SupportedTargetPlatforms": [
+				"Win64"
 			]
 		},
 		{
