@@ -1,9 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.MiniMap.cpp.obj": [
-			"PerModuleInline.gen.cpp.obj",
-			"MiniMap.cpp.obj"
-		]
-	}
-}
