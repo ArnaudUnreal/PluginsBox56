@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "PatrolPath",
+	"Description": "Patrol-from-point-to-point component",
+	"Category": "Other",
+	"CreatedBy": "Mecanode",
+	"CreatedByURL": "https://www.mecanode.com",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "PatrolPath",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
