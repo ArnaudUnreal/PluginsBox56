@@ -3,6 +3,7 @@
 
 #include "PatrolPathComponent.h"
 #include "PatrolPathSettings.h"
+#include "GameFramework/Actor.h"
 
 UPatrolPathComponent::UPatrolPathComponent()
 {

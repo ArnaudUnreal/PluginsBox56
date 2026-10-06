@@ -32,13 +32,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=1), Category="Patrol Path|Follow")
 	float AcceptanceRadius = 10;
 	
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintPure, Category="Patrol Path")
 	int32 GetPointCount() const;
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintPure, Category="Patrol Path")
 	FVector GetWorldPoint(int32 index) const;
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintPure, Category="Patrol Path")
 	TArray<FVector> GetWorldPoints() const;
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintPure, Category="Patrol Path")
 	int32 GetNextPointIndex(int32 index) const;
 	
 	virtual void BeginPlay() override;

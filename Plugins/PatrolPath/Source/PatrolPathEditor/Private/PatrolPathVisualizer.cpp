@@ -5,6 +5,8 @@
 #include "HPatrolPointProxy.h"
 #include "PatrolPathSettings.h"
 #include "PatrolPath/Public/PatrolPathComponent.h"
+#include "SceneManagement.h"
+#include "ScopedTransaction.h"
 
 #define LOCTEXT_NAMESPACE "PatrolPathVisualizer"
 
