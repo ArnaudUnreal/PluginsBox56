@@ -11,8 +11,6 @@ struct PATROLPATHEDITOR_API HPatrolPointProxy : public HComponentVisProxy
 			 : HComponentVisProxy(InComponent, HPP_Wireframe)
 			 , PointIndex(InPointIndex)
 	{
-		HComponentVisProxy(InComponent, HPP_Wireframe);
-		PointIndex = InPointIndex;
 	}
 	
 };

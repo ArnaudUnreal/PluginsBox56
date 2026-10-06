@@ -6,8 +6,6 @@
 
 UPatrolPathComponent::UPatrolPathComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
-
 	Points.Append({ FVector(0,0,0), 
 		FVector(300,0,0), 
 		FVector(300,300,0), 
@@ -62,7 +60,7 @@ FTransform UPatrolPathComponent::GetPathTransform() const
 
 int32 UPatrolPathComponent::GetPointCount() const
 {
-	return Points.Num()>0?Points.Num():-1;
+	return Points.Num();
 }
 
 /**
@@ -72,7 +70,7 @@ int32 UPatrolPathComponent::GetPointCount() const
  */
 FVector UPatrolPathComponent::GetWorldPoint(int32 index) const
 {
-	if (Points.Num()>0 && Points.IsValidIndex(index))
+	if (Points.IsValidIndex(index))
 	{
 		// ERREUR : le component bouge avec l'Actor
 		// return GetComponentTransform().TransformPosition(Points[index]);

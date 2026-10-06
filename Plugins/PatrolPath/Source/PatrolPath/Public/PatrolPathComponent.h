@@ -19,16 +19,16 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Patrol Path")
 	TArray<FVector> Points;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Patrol Path")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Patrol Path")
 	bool bClosedLoop;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Patrol Path")
+	UPROPERTY(EditAnywhere, Category="Patrol Path|Debug")
 	bool bDrawDebugInGame;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category="Patrol Path|Follow")
 	bool bFollowPath = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0), Category="Patrol Path|Follow")
 	float Speed = 300;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0), Category="Patrol Path|Follow")
-	float RotationSpeed;
+	float RotationSpeed = 360;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=1), Category="Patrol Path|Follow")
 	float AcceptanceRadius = 10;
 	
