@@ -77,5 +77,6 @@ DerivedDataCache/*
 # Not versioned (local only)
 /Content/
 /Docs/
+/Assets/
 /.idea/
 /update_copyright.py
