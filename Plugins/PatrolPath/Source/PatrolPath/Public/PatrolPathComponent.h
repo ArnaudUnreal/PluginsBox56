@@ -23,6 +23,14 @@ public:
 	bool bClosedLoop;
 	UPROPERTY(EditAnywhere, Category="Patrol Path|Debug")
 	bool bDrawDebugInGame;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category="Patrol Path|Follow")
+	bool bFollowPath = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0), Category="Patrol Path|Follow")
+	float Speed = 300;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0), Category="Patrol Path|Follow")
+	float RotationSpeed = 360;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=1), Category="Patrol Path|Follow")
+	float AcceptanceRadius = 10;
 	
 	UFUNCTION(BlueprintPure)
 	int32 GetPointCount() const;
@@ -32,4 +40,15 @@ public:
 	TArray<FVector> GetWorldPoints() const;
 	UFUNCTION(BlueprintPure)
 	int32 GetNextPointIndex(int32 index) const;
+	
+	virtual void BeginPlay() override;
+	
+private:
+	int32 CurrentIndex = 0;
+	FTransform FreezedTransform;
+	
+	void FollowPath(float DeltaTime);
+	FTransform GetPathTransform() const;
+	
+	
 };

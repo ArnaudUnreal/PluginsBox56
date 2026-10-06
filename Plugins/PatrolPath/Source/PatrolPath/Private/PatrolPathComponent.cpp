@@ -15,6 +15,48 @@ UPatrolPathComponent::UPatrolPathComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UPatrolPathComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	// 1. Correction du freeze du chemin
+	FreezedTransform = GetComponentTransform();
+	CurrentIndex = 0;
+}
+
+void UPatrolPathComponent::FollowPath(float DeltaTime)
+{
+	AActor* Owner = GetOwner();
+	if (!Owner || !Points.IsValidIndex(CurrentIndex)) return;
+	
+	FVector Target = GetWorldPoint(CurrentIndex);
+	FVector Direction = (Target - Owner->GetActorLocation()).GetSafeNormal2D();	// yaw only
+	if (!Direction.IsNearlyZero())
+	{
+		FRotator Current = Owner->GetActorRotation();
+		FRotator Desired = Current;
+		Desired.Yaw = Direction.Rotation().Yaw;
+		Owner->SetActorRotation(FMath::RInterpConstantTo(Current, Desired,DeltaTime, RotationSpeed));
+
+	}
+	
+	FVector NewLocation = FMath::VInterpConstantTo(Owner->GetActorLocation(), Target, DeltaTime, Speed);
+	Owner->SetActorLocation(NewLocation);
+	if (FVector::Dist(NewLocation, Target) <= AcceptanceRadius)
+	{
+		CurrentIndex = GetNextPointIndex(CurrentIndex);
+	}
+}
+
+FTransform UPatrolPathComponent::GetPathTransform() const
+{
+	if (HasBegunPlay())
+	{
+		return FreezedTransform;
+	}
+	return GetComponentTransform();
+}
+
 int32 UPatrolPathComponent::GetPointCount() const
 {
 	return Points.Num();
@@ -29,9 +71,16 @@ FVector UPatrolPathComponent::GetWorldPoint(int32 index) const
 {
 	if (Points.IsValidIndex(index))
 	{
-		return GetComponentTransform().TransformPosition(Points[index]);
+		// ERREUR : le component bouge avec l'Actor
+		// return GetComponentTransform().TransformPosition(Points[index]);
+		// CORRECTION
+		return GetPathTransform().TransformPosition(Points[index]);
+
 	}
-	return GetComponentLocation();
+	// ERREUR : le component bouge avec l'Actor
+	// return GetComponentLocation();
+	// CORRECTION
+	return GetPathTransform().GetLocation();
 }
 
 /**
@@ -74,6 +123,8 @@ void UPatrolPathComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
+	if (bFollowPath) FollowPath(DeltaTime);
+	
 	#if ENABLE_DRAW_DEBUG
 		if (bDrawDebugInGame)
 		{
@@ -99,3 +150,4 @@ void UPatrolPathComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		
 }
 
+ 
