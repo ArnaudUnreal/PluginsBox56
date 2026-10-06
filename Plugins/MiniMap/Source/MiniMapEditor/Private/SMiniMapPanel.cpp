@@ -1,3 +1,5 @@
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
 #include "SMiniMapPanel.h"
 #include "SMiniMapViewport.h"
 #include "Styling/AppStyle.h"

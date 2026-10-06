@@ -1,3 +1,5 @@
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
 using UnrealBuildTool;
 
 public class MiniMapEditor : ModuleRules

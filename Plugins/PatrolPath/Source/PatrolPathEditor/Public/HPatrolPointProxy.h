@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
+#pragma once
 #include "ComponentVisualizer.h"
 
 struct PATROLPATHEDITOR_API HPatrolPointProxy : public HComponentVisProxy

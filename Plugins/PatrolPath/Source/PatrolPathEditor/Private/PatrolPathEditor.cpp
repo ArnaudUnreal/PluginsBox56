@@ -1,4 +1,6 @@
-﻿#include "PatrolPathEditor.h"
+﻿// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
+#include "PatrolPathEditor.h"
 #include "UnrealEdGlobals.h"
 #include "PatrolPathVisualizer.h"
 #include "Editor/UnrealEdEngine.h"

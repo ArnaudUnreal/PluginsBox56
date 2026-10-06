@@ -1,3 +1,5 @@
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
 #include "SMiniMapViewport.h"
 #include "Editor.h"
 #include "EngineUtils.h"

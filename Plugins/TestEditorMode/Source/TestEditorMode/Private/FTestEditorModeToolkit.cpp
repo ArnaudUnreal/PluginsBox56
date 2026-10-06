@@ -1,4 +1,6 @@
-﻿#include "TestEditorMode/Public/FTestEditorModeToolkit.h"
+﻿// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
+#include "TestEditorMode/Public/FTestEditorModeToolkit.h"
 #include "TestEdMode.h"
 
 #include "EditorModeManager.h"

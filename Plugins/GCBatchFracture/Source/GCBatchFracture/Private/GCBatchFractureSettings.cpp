@@ -1,4 +1,4 @@
-// Copyright Arnaud Szobad 2026 All Rights Reserved.
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
 
 #include "GCBatchFractureSettings.h"
 

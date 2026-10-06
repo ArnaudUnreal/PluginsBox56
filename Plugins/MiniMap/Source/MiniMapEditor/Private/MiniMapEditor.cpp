@@ -1,3 +1,5 @@
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
 #include "MiniMapEditor.h"
 #include "SMiniMapPanel.h"
 #include "Framework/Application/SlateApplication.h"

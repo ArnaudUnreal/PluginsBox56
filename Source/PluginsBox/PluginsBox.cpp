@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
 
 #include "PluginsBox.h"
 #include "Modules/ModuleManager.h"

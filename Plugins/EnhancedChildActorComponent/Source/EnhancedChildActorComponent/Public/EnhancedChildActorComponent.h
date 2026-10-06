@@ -1,4 +1,4 @@
-// Copyright Mecanode. All Rights Reserved.
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
 
 #pragma once
 

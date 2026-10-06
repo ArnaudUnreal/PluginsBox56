@@ -1,4 +1,6 @@
-﻿#include "PatrolPathVisualizer.h"
+﻿// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
+#include "PatrolPathVisualizer.h"
 
 #include "HPatrolPointProxy.h"
 #include "PatrolPathSettings.h"

@@ -1,4 +1,4 @@
-// Copyright Mecanode. All Rights Reserved.
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
 
 #include "EnhancedChildActorComponent.h"
 #include "Engine/World.h"

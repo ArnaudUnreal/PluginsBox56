@@ -1,3 +1,5 @@
+// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
 #include "TestEditorModeModule.h"
 #include "TestEdMode.h"
 

@@ -1,4 +1,6 @@
-﻿using UnrealBuildTool;
+﻿// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
+using UnrealBuildTool;
 
 public class PatrolPathEditor : ModuleRules
 {

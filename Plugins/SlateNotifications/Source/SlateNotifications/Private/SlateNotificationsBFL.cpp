@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
 
 #include "SlateNotificationsBFL.h"
 #include "Framework/Notifications/NotificationManager.h"
