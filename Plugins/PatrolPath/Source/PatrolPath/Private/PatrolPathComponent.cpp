@@ -2,6 +2,7 @@
 
 
 #include "PatrolPathComponent.h"
+#include "PatrolPathSettings.h"
 
 UPatrolPathComponent::UPatrolPathComponent()
 {
@@ -126,11 +127,12 @@ void UPatrolPathComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	if (bFollowPath) FollowPath(DeltaTime);
 	
 	#if ENABLE_DRAW_DEBUG
+		const UPatrolPathSettings* Settings = GetDefault<UPatrolPathSettings>();
 		if (bDrawDebugInGame)
 		{
 			FVector P;
-			FColor Color = FColor::Green;
-			float Size = 12;
+			FColor Color = Settings->PointColor;
+			float Size = Settings->PointSize;
 			int32 next = 0;
 			int32 i = 0;
 			while (i < GetPointCount())

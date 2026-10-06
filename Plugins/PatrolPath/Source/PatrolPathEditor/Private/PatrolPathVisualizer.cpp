@@ -3,6 +3,7 @@
 #include "PatrolPathVisualizer.h"
 
 #include "HPatrolPointProxy.h"
+#include "PatrolPathSettings.h"
 #include "PatrolPath/Public/PatrolPathComponent.h"
 
 #define LOCTEXT_NAMESPACE "PatrolPathVisualizer"
@@ -11,18 +12,19 @@ void FPatrolPathVisualizer::DrawVisualization(const UActorComponent* Component, 
 	FPrimitiveDrawInterface* PDI)
 {
 	const UPatrolPathComponent* Path = Cast<const UPatrolPathComponent>(Component);
+	const UPatrolPathSettings* Settings = GetDefault<UPatrolPathSettings>();
 	if (!Path) return;
-	FLinearColor Color = FLinearColor::Green;
+	FColor Color = Settings->PointColor;
 	int32 i = 0;	
-	float Size = 12;
+	float Size = Settings->PointSize;
 	while (i < Path->GetPointCount())
 	{
 		FVector P = Path->GetWorldPoint(i);
 		// ajout
-		Color = FLinearColor::Green;
+		Color = Settings->PointColor;
 		if (Path == EditedComponent.Get() && i == SelectedIndex)
 		{
-			Color = FLinearColor(1, 0.5, 0);
+			Color = Settings->SelectedPointColor;
 		}
 		PDI->SetHitProxy(new HPatrolPointProxy(Path, i));
 		PDI->DrawPoint(P, Color, Size, SDPG_Foreground);
@@ -31,7 +33,7 @@ void FPatrolPathVisualizer::DrawVisualization(const UActorComponent* Component, 
 		int32 next = Path->GetNextPointIndex(i);
 		if (next != INDEX_NONE)
 		{
-			PDI->DrawLine(P, Path->GetWorldPoint(next),FLinearColor::Green, SDPG_Foreground);
+			PDI->DrawLine(P, Path->GetWorldPoint(next),Settings->PointColor, SDPG_Foreground);
 		}
 		i++;
 	}
