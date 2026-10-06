@@ -1,0 +1,101 @@
+﻿// Copyright Arnaud Szobad (Mecanode). All Rights Reserved.
+
+
+#include "PatrolPathComponent.h"
+
+UPatrolPathComponent::UPatrolPathComponent()
+{
+	Points.Append({ FVector(0,0,0), 
+		FVector(300,0,0), 
+		FVector(300,300,0), 
+		FVector(0,300,0) });
+	
+	bClosedLoop = true;
+	bDrawDebugInGame = false;
+	PrimaryComponentTick.bCanEverTick = true;
+}
+
+int32 UPatrolPathComponent::GetPointCount() const
+{
+	return Points.Num();
+}
+
+/**
+ * Position monde d’un point
+ * @param index int32
+ * @return FVector
+ */
+FVector UPatrolPathComponent::GetWorldPoint(int32 index) const
+{
+	if (Points.IsValidIndex(index))
+	{
+		return GetComponentTransform().TransformPosition(Points[index]);
+	}
+	return GetComponentLocation();
+}
+
+/**
+ * Renvoie tous les points en espace monde, dans l’ordre du chemin
+ * @return Result TArray<FVector> 
+ */
+TArray<FVector> UPatrolPathComponent::GetWorldPoints() const
+{
+	TArray<FVector> Result;
+	Result.Reserve(GetPointCount());
+	int32 i = 0;
+	while (i < GetPointCount())
+	{
+		Result.Add(GetWorldPoint(i));
+		i++;
+	}
+	return Result;
+}
+
+/**
+ * Renvoie l’index du point qui suit Index, en tenant compte de la boucle fermée
+ * @param index 
+ * @return 
+ */
+int32 UPatrolPathComponent::GetNextPointIndex(int32 index) const
+{
+	if (index+1<GetPointCount())
+	{
+		return index+1;
+	}
+	if (bClosedLoop && GetPointCount()>2)
+	{
+		return 0;
+	}
+	return INDEX_NONE;
+}
+
+void UPatrolPathComponent::TickComponent(float DeltaTime, ELevelTick TickType,
+                                         FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
+	#if ENABLE_DRAW_DEBUG
+		if (bDrawDebugInGame)
+		{
+			FVector P;
+			FColor Color = FColor::Green;
+			float Size = 12;
+			int32 next = 0;
+			int32 i = 0;
+			while (i < GetPointCount())
+			{
+				// P = Points[i]; ERREUR : le chemin ne tourne pas avec l'Actor
+				P = GetWorldPoint(i); // Correction
+				DrawDebugPoint(GetWorld(), P, Size, Color);
+				next = GetNextPointIndex(i);
+				if (next != INDEX_NONE)
+				{
+					DrawDebugLine(GetWorld(), P, GetWorldPoint(next), Color);
+				}
+				i++;
+			}
+		}
+	#endif
+		
+}
+
