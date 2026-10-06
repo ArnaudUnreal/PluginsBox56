@@ -10,4 +10,6 @@ class PATROLPATHEDITOR_API FPatrolPathEditorModule : public IModuleInterface
 public:
     virtual void StartupModule() override;
     virtual void ShutdownModule() override;
+    
+    TSharedPtr<class FPatrolPathVisualizer> Visualizer;
 };

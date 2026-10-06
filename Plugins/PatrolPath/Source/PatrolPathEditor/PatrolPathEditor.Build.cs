@@ -22,7 +22,8 @@ public class PatrolPathEditor : ModuleRules
                 "Engine",
                 "Slate",
                 "SlateCore",
-                "UnrealEd"
+                "UnrealEd",
+                "PatrolPath"
             }
         );
     }
