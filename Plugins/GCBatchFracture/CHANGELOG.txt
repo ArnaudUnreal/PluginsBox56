@@ -1,0 +1,123 @@
+GCBatchFracture - Changelog
+===========================
+
+[2026-10-04] Version 0.5.0 (depuis v0.4.3)
+------------------------------------------
+
+Fracture
+- Les sites Voronoi sont maintenant générés dans la bounding box de chaque morceau
+  sélectionné (VoronoiSites sites par morceau), en espace collection, au lieu de
+  l'être dans la bounding box globale calculée à partir des vertices en espace local.
+  Les niveaux > 0 découpent réellement les morceaux sélectionnés, même petits.
+  (GCBatchFractureService.cpp : BuildBoundsForTransforms, GenerateVoronoiSitesInBounds)
+- Un niveau de fracture > 0 qui ne crée aucun nouveau transform ne fait plus échouer
+  tout l'asset : il est ignoré et signalé comme limitation ("LIMITED").
+  Le niveau 0 reste bloquant.
+
+Robustesse
+- Un asset Geometry Collection dont la fracture ou la sauvegarde échoue est maintenant
+  supprimé de la mémoire et de l'Asset Registry (DiscardGeneratedAsset). Il n'apparaît
+  plus comme asset cassé dans le Content Browser et n'est plus considéré comme
+  "existant" (Skip / renommage) au lancement suivant.
+- Le message d'échec de validation du mesh source contient maintenant la vraie raison
+  (render data absente, trop de vertices / triangles) au lieu de "Mesh is not valid."
+
+Interface
+- Une notification éditeur affiche le bilan en fin de batch (créés / ignorés / en échec
+  / limités), avec un lien "Show Output Log". Elle est en état d'échec s'il y a des
+  échecs ou des limitations.
+- L'avertissement "non-overlapping convex hulls" du dialogue ne s'affiche plus que
+  lorsque le preset Custom est sélectionné (les autres presets désactivent cette option).
+- Le menu contextuel ne charge plus les assets sélectionnés à l'ouverture du clic droit :
+  seules les FAssetData sont lues, les Static Meshes sont chargés au lancement de l'action.
+
+Settings
+- Les valeurs par défaut sont maintenant cohérentes : le constructeur applique le preset
+  Balanced, et les initialiseurs du header correspondent à ce preset
+  (VoronoiSites 4, TinyGeometryMinSizeCm 1.5, cluster hulls activés, PointSpacing 10).
+  Avant, header, constructeur et preset Balanced donnaient trois jeux de valeurs différents.
+- Les presets fixent CollisionSampleSpacing à 0.001 (au lieu de 0.0) pour respecter le
+  ClampMin de la propriété.
+
+Optimisations
+- La complexité du mesh source est vérifiée avant toute création : un mesh refusé ne
+  laisse plus de dossier GC/ vide sur le disque.
+- Le contrôle de complexité compte maintenant la géométrie Nanite d'entrée
+  (NumInputVertices / NumInputTriangles) pour les meshes Nanite. Avant, il comptait le
+  LOD0 de rendu, qui n'est que le fallback basse résolution, alors qu'AppendStaticMesh
+  fracture la géométrie source en pleine résolution.
+- MaxSourceTriangles vaut 200 000 par défaut (0 = désactivé, comme avant) pour éviter
+  les batchs interminables sur des meshes très denses. Attention : une valeur déjà
+  enregistrée dans un .ini (ex. MaxSourceTriangles=0) reste prioritaire.
+- La garbage collection périodique (GarbageCollectEveryNAssets) compte maintenant tous
+  les assets créés, y compris ceux qui échouent et sont jetés, et plus seulement les
+  succès.
+- Progression détaillée à l'intérieur de chaque asset (un palier par niveau de fracture,
+  puis nettoyage / hulls de collision / données de simulation et de rendu).
+  L'annulation est prise en compte entre ces étapes, et plus seulement entre deux assets :
+  l'asset en cours est alors jeté et le batch s'arrête, sans être compté en échec.
+- Les sites Voronoi sont transmis au moteur par MoveTemp (plus de copie du tableau).
+- Les settings sont lus une seule fois par batch et passés en paramètre aux fonctions
+  internes, au lieu d'appeler GetDefault<UGCBatchFractureSettings>() à plusieurs endroits.
+
+Settings : sauvegarde par utilisateur
+- La classe de settings n'a plus le spécificateur DefaultConfig, et les appels à
+  TryUpdateDefaultConfigFile() ont été retirés (dialogue et Project Settings).
+  Les réglages sont maintenant enregistrés uniquement dans le .ini utilisateur
+  (Saved/Config/.../EditorPerProjectUserSettings.ini) et ne modifient plus le fichier
+  versionné Config/DefaultEditorPerProjectUserSettings.ini.
+- Les valeurs déjà présentes dans Config/DefaultEditorPerProjectUserSettings.ini restent
+  lues comme valeurs de base, mais ne sont plus réécrites.
+- GetContainerName() renvoie "Project" : la section "GC Batch Fracture" s'affiche dans
+  Project Settings > Plugins. Sans cette surcharge, Config=EditorPerProjectUserSettings
+  la range automatiquement dans Editor Preferences.
+
+Correctif bloquant : fracture infinie (collision samples)
+- Symptôme : éditeur figé indéfiniment (plus de 2 h, 13-16 Go de RAM) sur un mesh de
+  40 000 triangles. Pile d'appels : VoronoiFracture > CutMultipleWithPlanarCells >
+  AppendToCollection > AugmentedDynamicMesh::AddCollisionSamplesPerComponent.
+- Cause : en UE 5.6 et 5.7, VoronoiFracture ignore bAddSamplesForCollision et ajoute
+  des points d'échantillonnage dès que CollisionSampleSpacing > 0 (5.8 respecte le
+  booléen). La correction précédente "CollisionSampleSpacing 0.0 -> 0.001 pour respecter
+  le ClampMin" (voir Settings plus haut) a donc activé l'échantillonnage avec un point
+  tous les 0,001 cm. Cette correction était une erreur.
+- Correctif : le plugin transmet 0 au moteur quand bAddSamplesForCollision est désactivé,
+  quelle que soit la valeur de CollisionSampleSpacing.
+- CollisionSampleSpacing : défaut 50 cm (valeur des nodes Dataflow du moteur), ClampMin
+  1 cm, éditable seulement si bAddSamplesForCollision est coché.
+- Les raisons d'échec ([FAILED]) sont maintenant écrites dans l'Output Log en fin de
+  batch (avant, elles n'étaient visibles nulle part).
+
+Annulation : retour utilisateur
+- L'annulation est écrite dans l'Output Log (Warning), avec le nom de l'asset jeté
+  s'il était en cours.
+- Une notification s'affiche aussi quand le batch est annulé, même si aucun asset n'a
+  été créé (avant : aucune notification si l'annulation tombait sur le premier asset).
+- FGCBatchFractureResult::bCancelled indique qu'un batch a été annulé.
+
+Fracture sur un thread de travail (éditeur réactif, annulation)
+- Les niveaux de fracture, le nettoyage (FixTinyGeo, validation) et la génération des
+  hulls de collision tournent sur un thread de travail (UE::Tasks). Le thread principal
+  garde la fenêtre de progression réactive et lit le bouton Cancel en continu.
+- Création des données de simulation et de rendu, enregistrement et sauvegarde restent
+  sur le thread principal (ils touchent l'UObject et les ressources de rendu).
+- Annulation : le thread de travail s'arrête à la fin de l'étape en cours. Un appel au
+  moteur déjà lancé ne peut pas être interrompu : la fenêtre affiche alors
+  "Cancelling: waiting for the current engine operation to finish..." et l'Output Log
+  le signale.
+- Les settings sont copiés au début du batch : le thread de travail lit cette copie,
+  pas les settings modifiables dans Project Settings pendant le batch.
+- L'asset n'est annoncé à l'Asset Registry (Content Browser) qu'une fois terminé, pour
+  que rien ne lise la collection pendant que le thread de travail la modifie.
+- Un second batch ne peut pas démarrer tant qu'un batch est en cours.
+
+Compatibilité moteur
+- Plugin compilé avec succès sur UE 5.6, 5.7 et 5.8 (RunUAT BuildPlugin, Win64),
+  sans erreur ni warning du plugin. Aucune condition par version nécessaire.
+- UE 5.8 : VoronoiFracture prend un FIslandSplitSettings au lieu d'un bool pour
+  bSplitIslands. La conversion implicite depuis le bool garde le même comportement
+  (paramètres CloseVertexDistance / VertexToSurfaceBridgeDistance par défaut).
+- Compilation uniquement : un batch reste à tester dans l'éditeur 5.7 et 5.8.
+- Paquets par version et logs : Saved/GCBC (o5.6, o5.7, o5.8).
+
+Note : les settings déjà enregistrés dans les fichiers .ini du projet ne sont pas modifiés.
