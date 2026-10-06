@@ -60,4 +60,38 @@ void FPatrolPathVisualizer::EndEditing()
 	SelectedIndex = INDEX_NONE;
 }
 
+bool FPatrolPathVisualizer::GetWidgetLocation(const FEditorViewportClient* ViewportClient, FVector& OutLocation) const
+{
+	UPatrolPathComponent* Path = EditedComponent.Get();
+	if (Path && Path->Points.IsValidIndex(SelectedIndex))
+	{
+		OutLocation = Path->GetWorldPoint(SelectedIndex);
+		return true;
+	}
+	return false;
+}
+
+bool FPatrolPathVisualizer::HandleInputDelta(FEditorViewportClient* ViewportClient, FViewport* Viewport,
+	FVector& DeltaTranslate, FRotator& DeltaRotate, FVector& DeltaScale)
+{
+	UPatrolPathComponent* Path = EditedComponent.Get();
+	if (!Path || !Path->Points.IsValidIndex(SelectedIndex)) return false;
+	if (DeltaTranslate.IsZero()) return true;
+	
+	FScopedTransaction Transaction(LOCTEXT("MovePatrolPoint", "Move Patrol Point")); 
+	// ERREUR - sans le modify, pas de ctrl-Z
+	Path->Modify();
+	
+	// ERREUR : passage du Delta en World
+	// Path->Points[SelectedIndex] = Path->Points[SelectedIndex] + DeltaTranslate;
+	// CORRECTION
+	FVector LocalDelta = Path->GetComponentTransform().InverseTransformVector(DeltaTranslate);
+	Path->Points[SelectedIndex] = Path->Points[SelectedIndex] + LocalDelta;
+	
+	FProperty* PointsProperty = FindFProperty<FProperty>(UPatrolPathComponent::StaticClass(),
+		GET_MEMBER_NAME_CHECKED(UPatrolPathComponent, Points));
+	NotifyPropertyModified(Path, PointsProperty);
+	return true;
+}
+
 #undef LOCTEXT_NAMESPACE

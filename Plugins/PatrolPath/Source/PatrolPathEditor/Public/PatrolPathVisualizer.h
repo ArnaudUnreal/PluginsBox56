@@ -18,6 +18,9 @@ public:
 	
 	virtual UActorComponent* GetEditedComponent() const override;
 	virtual void EndEditing() override;
+	virtual bool GetWidgetLocation(const FEditorViewportClient* ViewportClient, FVector& OutLocation) const override;
+	virtual bool HandleInputDelta(FEditorViewportClient* ViewportClient, FViewport* Viewport,
+		FVector& DeltaTranslate, FRotator& DeltaRotate, FVector& DeltaScale ) override;
 	
 	
 	TWeakObjectPtr<class UPatrolPathComponent> EditedComponent;
