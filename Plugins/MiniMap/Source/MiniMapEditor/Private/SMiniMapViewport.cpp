@@ -78,6 +78,23 @@ namespace MiniMap
 		return nullptr;
 	}
 
+	// Actual camera transform. While orbiting (Alt+LMB), the view rotation holds orbit parameters
+	// around the look-at point, not the camera rotation: rebuild it like the engine does
+	static void GetCameraView(const FLevelEditorViewportClient& VC, FVector& OutLocation, FRotator& OutRotation)
+	{
+		if (VC.bUsingOrbitCamera)
+		{
+			const FMatrix CameraToWorld = VC.GetViewTransform().ComputeOrbitMatrix().InverseFast();
+			OutLocation = CameraToWorld.GetOrigin();
+			OutRotation = CameraToWorld.Rotator();
+		}
+		else
+		{
+			OutLocation = VC.GetViewLocation();
+			OutRotation = VC.GetViewRotation();
+		}
+	}
+
 	static void AddLine(FSlateWindowElementList& Out, int32 Layer, const FGeometry& Geo,
 		const FVector2D& A, const FVector2D& B, const FLinearColor& Col, float Thickness = 1.f)
 	{
@@ -347,12 +364,15 @@ void SMiniMapViewport::MoveEditorCameraTo(const FVector& WorldPos)
 	// Active perspective camera: keep rotation, place it so it looks at Target
 	if (FLevelEditorViewportClient* VC = MiniMap::GetActivePerspectiveClient())
 	{
-		const FVector Forward = VC->GetViewRotation().Vector();
+		FVector CamLoc;
+		FRotator CamRot;
+		MiniMap::GetCameraView(*VC, CamLoc, CamRot);
+		const FVector Forward = CamRot.Vector();
 		FVector NewLoc;
 		if (Forward.Z < -0.1)
 		{
 			// Keep current height above ground, along the view direction
-			const double Height = FMath::Max(VC->GetViewLocation().Z - Target.Z, 500.0);
+			const double Height = FMath::Max(CamLoc.Z - Target.Z, 500.0);
 			NewLoc = Target - Forward * (Height / -Forward.Z);
 		}
 		else
@@ -362,6 +382,9 @@ void SMiniMapViewport::MoveEditorCameraTo(const FVector& WorldPos)
 			NewLoc.Z = Target.Z + 300.0;
 		}
 		VC->SetViewLocation(NewLoc);
+		VC->SetViewRotation(CamRot);
+		// Next orbit (Alt+LMB) pivots around the clicked point instead of jumping back to the old look-at
+		VC->SetLookAtLocation(Target);
 		VC->Invalidate();
 	}
 
@@ -598,8 +621,11 @@ int32 SMiniMapViewport::OnPaint(const FPaintArgs& Args, const FGeometry& Geo,
 	// Active editor camera: position + horizontal field of view
 	if (const FLevelEditorViewportClient* VC = MiniMap::GetActivePerspectiveClient())
 	{
-		const FVector2D P = WorldToMap(VC->GetViewLocation(), Size);
-		const float Yaw = FMath::DegreesToRadians(VC->GetViewRotation().Yaw);
+		FVector CamLoc;
+		FRotator CamRot;
+		MiniMap::GetCameraView(*VC, CamLoc, CamRot);
+		const FVector2D P = WorldToMap(CamLoc, Size);
+		const float Yaw = FMath::DegreesToRadians(CamRot.Yaw);
 		const float HalfFov = FMath::DegreesToRadians(FMath::Clamp(VC->ViewFOV, 1.f, 170.f) * 0.5f);
 		const float Len = 40.f;
 
