@@ -21,6 +21,8 @@ public:
 	FColor SelectedPointColor = FColor::Orange;
 	UPROPERTY(Config, EditAnywhere, meta=(ClampMin=1), Category="Display")
 	int32 PointSize = 12;
+	UPROPERTY(Config, EditAnywhere, meta=(ClampMin=1), Category="Display")
+	int32 LineWidth = 5;
 	
 	virtual FName GetCategoryName() const override { return TEXT("Plugins"); }
 };

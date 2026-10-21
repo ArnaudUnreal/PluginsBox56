@@ -21,8 +21,11 @@ public:
 	virtual bool GetWidgetLocation(const FEditorViewportClient* ViewportClient, FVector& OutLocation) const override;
 	virtual bool HandleInputDelta(FEditorViewportClient* ViewportClient, FViewport* Viewport,
 		FVector& DeltaTranslate, FRotator& DeltaRotate, FVector& DeltaScale ) override;
-	
+	virtual TSharedPtr<SWidget> GenerateContextMenu() const override;
 	
 	TWeakObjectPtr<class UPatrolPathComponent> EditedComponent;
-	int32 SelectedIndex = INDEX_NONE;
+	int32 SelectedPointIndex = INDEX_NONE;
+	int32 SelectedSegmentIndex = INDEX_NONE;
+	int32 PendingInsertIndex = INDEX_NONE;
+	FVector PendingInsertLocation = FVector::ZeroVector;
 };
