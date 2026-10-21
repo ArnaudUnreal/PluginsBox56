@@ -30,10 +30,24 @@ namespace MiniMap
 	constexpr float DotHalfSizePx = 2.f;
 	constexpr float MinFootprintPx = 6.f;      // smaller footprints are drawn as dots
 	constexpr int32 BackgroundResolution = 2048;
+	constexpr double MinCameraHeight = 500.0;  // above ground, after a click-to-move
 
 	static UWorld* GetEditorWorld()
 	{
 		return GEditor ? GEditor->GetEditorWorldContext().World() : nullptr;
+	}
+
+	// Height of the first surface under a world XY, Fallback if nothing is hit
+	static double TraceGroundZ(UWorld* World, double X, double Y, double Fallback)
+	{
+		FHitResult Hit;
+		const FCollisionQueryParams Params(SCENE_QUERY_STAT(MiniMapGroundTrace), /*bTraceComplex*/ true);
+		if (World && World->LineTraceSingleByChannel(Hit,
+			FVector(X, Y, HALF_WORLD_MAX), FVector(X, Y, -HALF_WORLD_MAX), ECC_Visibility, Params))
+		{
+			return Hit.ImpactPoint.Z;
+		}
+		return Fallback;
 	}
 
 	static bool IsMappableActor(const AActor* A)
@@ -346,45 +360,27 @@ void SMiniMapViewport::MoveEditorCameraTo(const FVector& WorldPos)
 	if (!GEditor) return;
 	UWorld* World = MiniMap::GetEditorWorld();
 
-	// Ground height under the clicked point
-	FVector Target(WorldPos.X, WorldPos.Y, 0.0);
-	if (World)
-	{
-		FHitResult Hit;
-		const FCollisionQueryParams Params(SCENE_QUERY_STAT(MiniMapGroundTrace), /*bTraceComplex*/ true);
-		if (World->LineTraceSingleByChannel(Hit,
-			FVector(WorldPos.X, WorldPos.Y, HALF_WORLD_MAX),
-			FVector(WorldPos.X, WorldPos.Y, -HALF_WORLD_MAX),
-			ECC_Visibility, Params))
-		{
-			Target.Z = Hit.ImpactPoint.Z;
-		}
-	}
+	const FVector Target(WorldPos.X, WorldPos.Y, MiniMap::TraceGroundZ(World, WorldPos.X, WorldPos.Y, 0.0));
 
-	// Active perspective camera: keep rotation, place it so it looks at Target
+	// Active perspective camera: right above the clicked point, keeping rotation and height above ground
+	// (so it lands under the cursor on the map, whatever the map zoom)
 	if (FLevelEditorViewportClient* VC = MiniMap::GetActivePerspectiveClient())
 	{
 		FVector CamLoc;
 		FRotator CamRot;
 		MiniMap::GetCameraView(*VC, CamLoc, CamRot);
-		const FVector Forward = CamRot.Vector();
-		FVector NewLoc;
-		if (Forward.Z < -0.1)
-		{
-			// Keep current height above ground, along the view direction
-			const double Height = FMath::Max(CamLoc.Z - Target.Z, 500.0);
-			NewLoc = Target - Forward * (Height / -Forward.Z);
-		}
-		else
-		{
-			// Looking (almost) horizontally: step back from the point
-			NewLoc = Target - Forward.GetSafeNormal2D() * 1000.0;
-			NewLoc.Z = Target.Z + 300.0;
-		}
+		const double GroundUnderCamera = MiniMap::TraceGroundZ(World, CamLoc.X, CamLoc.Y, Target.Z);
+		const double Height = FMath::Max(CamLoc.Z - GroundUnderCamera, MiniMap::MinCameraHeight);
+		const FVector NewLoc(Target.X, Target.Y, Target.Z + Height);
+
 		VC->SetViewLocation(NewLoc);
 		VC->SetViewRotation(CamRot);
-		// Next orbit (Alt+LMB) pivots around the clicked point instead of jumping back to the old look-at
-		VC->SetLookAtLocation(Target);
+
+		// Next orbit (Alt+LMB) pivots around the point now in view instead of jumping back to the old look-at:
+		// where the view direction reaches the ground level, or a point ahead when looking (almost) horizontally
+		const FVector Forward = CamRot.Vector();
+		const double LookDist = Forward.Z < -0.1 ? Height / -Forward.Z : 1000.0;
+		VC->SetLookAtLocation(NewLoc + Forward * LookDist);
 		VC->Invalidate();
 	}
 

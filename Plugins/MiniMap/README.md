@@ -73,7 +73,7 @@ Open the tab from **Window > Level Editor > Mini-Map**, then dock it wherever yo
 |---|---|
 | Left click on an actor | Select the actor. |
 | Ctrl + left click on an actor | Add / remove the actor from the selection. |
-| Left click on empty space | Move the editor camera to look at that point. |
+| Left click on empty space | Move the editor camera above that point. |
 | Double-click on an actor | Focus the editor camera on the actor. |
 | Right mouse drag | Pan the map. |
 | Mouse wheel | Zoom, centered on the cursor. |
@@ -167,7 +167,7 @@ Core, CoreUObject, Engine, RenderCore, Slate, SlateCore, InputCore, UnrealEd, Wo
 - Pan follows the cursor at any DPI scale.
 - Map content clipped to the panel.
 - Bounds computed from actor footprints instead of actor locations.
-- Camera moves keep rotation and target the ground under the clicked point.
+- Camera moves keep rotation and height above ground, and place the camera above the clicked point.
 - New toolbar: Fit, All actors, Capture, Background, Filter.
 - All actors display, actor selection from the map, double-click focus.
 - Active camera display.

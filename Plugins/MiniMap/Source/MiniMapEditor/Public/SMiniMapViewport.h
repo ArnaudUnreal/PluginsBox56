@@ -52,7 +52,7 @@ public:
 	// Case-insensitive substring on actor class name or label, used when "all actors" is off
 	void SetFilterText(const FString& InFilter);
 
-	// Move the active editor camera so it looks at WorldPos (ground Z traced), keeping its rotation
+	// Move the active editor camera right above WorldPos (ground Z traced), keeping its rotation and height above ground
 	static void MoveEditorCameraTo(const FVector& WorldPos);
 
 	virtual FReply OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
